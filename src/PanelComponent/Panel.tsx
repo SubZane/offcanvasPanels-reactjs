@@ -1,9 +1,8 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
+import { styled, css } from './theme'
 import Content from './Content'
 
 type PanelType = {
-	borderRadius: string
 	visible: boolean
 	animation: string
 }
@@ -14,9 +13,7 @@ const Panel = styled.div<PanelType>`
 	z-index: 2000;
 	backface-visibility: hidden;
 	visibility: hidden;
-
-	/* animation props */
-		transform: rotateX(0deg);
+	transform: rotateX(0deg);
 	${props =>
 		props.animation === 'flip-top' &&
 		css`
@@ -92,32 +89,16 @@ const Panel = styled.div<PanelType>`
 	}
 `
 interface PanelContainerProps {
-	borderRadius: string
 	visible: boolean
 	animation: 'door-left' | 'door-right' | 'flip-bottom' | 'flip-top'
-	backgroundColor: string
-	transitionDuration: string
-	innerPadding: string
 	onTransitionEnd: () => void
 	children?: JSX.Element[] | JSX.Element
 }
 
 function PanelContainer(props: PanelContainerProps) {
 	return (
-		<Panel
-			borderRadius={props.borderRadius}
-			animation={props.animation}
-			visible={props.visible}
-			onTransitionEnd={props.onTransitionEnd}>
-			<Content
-				innerPadding={props.innerPadding}
-				borderRadius={props.borderRadius}
-				visible={props.visible}
-				animation={props.animation}
-				children={props.children}
-				transitionDuration={props.transitionDuration}
-				backgroundColor={props.backgroundColor}
-			/>
+		<Panel animation={props.animation} visible={props.visible} onTransitionEnd={props.onTransitionEnd}>
+			<Content visible={props.visible} animation={props.animation} children={props.children} />
 		</Panel>
 	)
 }

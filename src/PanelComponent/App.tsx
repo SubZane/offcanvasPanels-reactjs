@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { css, createGlobalStyle } from 'styled-components'
+import { css, createGlobalStyle } from './theme'
 import Overlay from './Overlay'
 import PanelButton from './PanelButton'
 import Panel from './Panel'
@@ -30,14 +30,8 @@ html {
 
 export interface FlyPanelsProps {
 	animation: 'door-left' | 'door-right' | 'flip-bottom' | 'flip-top'
-	transitionDuration: string
-	borderRadius: string
 	customButtonReference: boolean
-	innerPadding: string
-	backgroundColor: string
 	buttonPosition: string
-	buttonBackgroundColor: string
-	buttonColor: string
 	children?: JSX.Element[] | JSX.Element
 }
 
@@ -101,7 +95,6 @@ function OffCanvasPanel(props: FlyPanelsProps) {
 			<GlobalStyle visible={isPanelVisible} />
 
 			<Overlay
-				transitionDuration={props.transitionDuration}
 				fadein={fadein}
 				fadeout={fadeout}
 				hide={hideOverlay}
@@ -110,22 +103,12 @@ function OffCanvasPanel(props: FlyPanelsProps) {
 			/>
 
 			<Panel
-				innerPadding={props.innerPadding}
-				borderRadius={props.borderRadius}
 				animation={props.animation}
 				visible={isPanelVisible}
-				transitionDuration={props.transitionDuration}
 				onTransitionEnd={onPanelTransitionEnd}
 				children={props.children}
-				backgroundColor={props.backgroundColor}
 			/>
-			{isPanelButtonVisible && (
-				<PanelButton
-					buttonBackgroundColor={props.buttonBackgroundColor}
-					buttonColor={props.buttonColor}
-					position={props.buttonPosition}
-					handleEvent={openPanel}></PanelButton>
-			)}
+			{isPanelButtonVisible && <PanelButton position={props.buttonPosition} handleEvent={openPanel}></PanelButton>}
 		</React.Fragment>
 	)
 }

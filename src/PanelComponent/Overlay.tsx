@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { keyframes, css } from 'styled-components'
+import { styled, css, keyframes } from './theme'
 
 const fadein = keyframes`
 	0% { opacity: 0;}
@@ -15,7 +15,6 @@ type OverlayType = {
 	fadein: boolean
 	fadeout: boolean
 	hide: boolean
-	transitionDuration: string
 }
 
 const Overlay = styled.div<OverlayType>`
@@ -32,7 +31,7 @@ const Overlay = styled.div<OverlayType>`
 		props.fadein &&
 		css`
 			animation: ${fadein};
-			animation-duration: ${props.transitionDuration};
+			animation-duration: ${props.theme.transitionDuration};
 			animation-fill-mode: forwards;
 			animation-timing-function: ease-in;
 			animation-iteration-count: 1;
@@ -42,7 +41,7 @@ const Overlay = styled.div<OverlayType>`
 		props.fadeout &&
 		css`
 			animation: ${fadeout};
-			animation-duration: ${props.transitionDuration};
+			animation-duration: ${props.theme.transitionDuration};
 			animation-timing-function: ease-out;
 			animation-fill-mode: forwards;
 			animation-iteration-count: 1;
@@ -57,7 +56,6 @@ const Overlay = styled.div<OverlayType>`
 `
 
 interface OverlayProps {
-	transitionDuration: string
 	fadein: boolean
 	fadeout: boolean
 	hide: boolean
@@ -68,7 +66,6 @@ interface OverlayProps {
 function OverlayContainer(props: OverlayProps) {
 	return (
 		<Overlay
-			transitionDuration={props.transitionDuration}
 			fadein={props.fadein}
 			fadeout={props.fadeout}
 			hide={props.hide}

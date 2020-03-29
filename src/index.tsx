@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import OffCanvasPanel from './PanelComponent/App'
+import { ThemeProvider, theme } from './PanelComponent/theme'
 
 // const mybutton = React.createRef()
 // <button className="custombutton" ref={mybutton}>
@@ -9,16 +10,9 @@ import OffCanvasPanel from './PanelComponent/App'
 
 ReactDOM.render(
 	<React.Fragment>
-		<OffCanvasPanel
-			animation={'door-left'}
-			transitionDuration={'0.5s'}
-			borderRadius={'7px'}
-			customButtonReference={false}
-			innerPadding={'0px'}
-			backgroundColor={'#E3DFDA'}
-			buttonPosition={'right'}
-			buttonBackgroundColor={'#8DBFD1'}
-			buttonColor={'#fff'}></OffCanvasPanel>
+		<ThemeProvider theme={theme}>
+			<OffCanvasPanel animation={'door-left'} customButtonReference={false} buttonPosition={'right'}></OffCanvasPanel>
+		</ThemeProvider>
 	</React.Fragment>,
 	document.getElementById('root')
 )

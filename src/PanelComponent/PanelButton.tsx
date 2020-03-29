@@ -1,16 +1,14 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
+import { styled, css } from './theme'
 
 type PanelButtonType = {
-	backgroundColor: string
 	position: string
-	buttonColor: string
 }
 
 const PanelButton = styled.div<PanelButtonType>`
 	position: fixed;
 	width: 50px;
-	background-color: ${props => props.backgroundColor || 'coral'};
+	background-color: ${props => props.theme.button.backgroundColor || 'coral'};
 	color: white;
 	font-weight: bold;
 	border-radius: 50px;
@@ -40,7 +38,7 @@ const PanelButton = styled.div<PanelButtonType>`
 		`}
 	&:after {
 		right: 16px;
-    color: ${props => props.buttonColor || '#fff'};
+    color: ${props => props.theme.button.color || '#fff'};
     position: absolute;
     top: 1px;
     line-height: 50px;
@@ -53,21 +51,12 @@ const PanelButton = styled.div<PanelButtonType>`
 `
 
 interface PanelContentProps {
-	buttonBackgroundColor: string
 	position: string
-	buttonColor: string
 	handleEvent: () => void
 }
 
 function PanelButtonContainer(props: PanelContentProps) {
-	return (
-		<PanelButton
-			backgroundColor={props.buttonBackgroundColor}
-			buttonColor={props.buttonColor}
-			position={props.position}
-			onClick={props.handleEvent}
-		></PanelButton>
-	)
+	return <PanelButton position={props.position} onClick={props.handleEvent}></PanelButton>
 }
 
 export default PanelButtonContainer

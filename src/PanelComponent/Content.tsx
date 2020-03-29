@@ -1,17 +1,14 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
+import { styled, css } from './theme'
 
 type ContentType = {
-	borderRadius: string
 	visible: boolean
 	animation: string
-	backgroundColor: string
-	transitionDuration: string
 }
 
 const Content = styled.div<ContentType>`
 	color: #fff;
-	background: ${props => props.backgroundColor};
+	background: ${props => props.theme.backgroundColor};
 	max-width: 600px;
 	overflow: hidden;
 	position: absolute;
@@ -23,8 +20,8 @@ const Content = styled.div<ContentType>`
 	${props =>
 		props.animation === 'flip-top' &&
 		css`
-			border-bottom-left-radius: ${props.borderRadius};
-			border-bottom-right-radius: ${props.borderRadius};
+			border-bottom-left-radius: ${props.theme.borderRadius};
+			border-bottom-right-radius: ${props.theme.borderRadius};
 			border-top-left-radius: 0;
 			border-top-right-radius: 0;
 			top: 0;
@@ -36,31 +33,31 @@ const Content = styled.div<ContentType>`
 			opacity: 0;
 			transition-timing-function: ease-out;
 			transition: all;
-			transition-duration: ${props.transitionDuration};
+			transition-duration: ${props.theme.transitionDuration};
 		`}
 
   ${props =>
 		props.animation === 'door-left' &&
 		css`
 			border-bottom-left-radius: 0;
-			border-bottom-right-radius: ${props.borderRadius};
+			border-bottom-right-radius: ${props.theme.borderRadius};
 			border-top-left-radius: 0;
-			border-top-right-radius: ${props.borderRadius};
+			border-top-right-radius: ${props.theme.borderRadius};
 
 			transform-style: preserve-3d;
 			transform: translateZ(100px) translateX(0%) rotateY(90deg);
 			transform-origin: 0 100%;
 			opacity: 0;
 			transition: all;
-			transition-duration: ${props.transitionDuration};
+			transition-duration: ${props.theme.transitionDuration};
 		`}
 
 	${props =>
 		props.animation === 'door-right' &&
 		css`
-			border-bottom-left-radius: ${props.borderRadius};
+			border-bottom-left-radius: ${props.theme.borderRadius};
 			border-bottom-right-radius: 0;
-			border-top-left-radius: ${props.borderRadius};
+			border-top-left-radius: ${props.theme.borderRadius};
 			border-top-right-radius: 0;
 
 			transform-style: preserve-3d;
@@ -68,7 +65,7 @@ const Content = styled.div<ContentType>`
 			transform-origin: 100% 0;
 			opacity: 0;
 			transition: all;
-			transition-duration: ${props.transitionDuration};
+			transition-duration: ${props.theme.transitionDuration};
 		`}
 
 	${props =>
@@ -76,8 +73,8 @@ const Content = styled.div<ContentType>`
 		css`
 		border-bottom-left-radius: 0;
 		border-bottom-right-radius: 0;
-		border-top-left-radius: ${props.borderRadius};
-		border-top-right-radius: $props.borderRadius};
+		border-top-left-radius: ${props.theme.borderRadius};
+		border-top-right-radius: $props.theme.borderRadius};
 		bottom: 0;
 
 		transform-style: preserve-3d;
@@ -86,7 +83,7 @@ const Content = styled.div<ContentType>`
 		opacity: 0;
 		transition-timing-function: ease-out;
 		transition: all;
-		transition-duration: ${props.transitionDuration};
+		transition-duration: ${props.theme.transitionDuration};
 	`}
 
 	${props =>
@@ -115,43 +112,30 @@ const Content = styled.div<ContentType>`
 
 `
 
-type InnerType = {
-	innerPadding: string
-}
-
-const Inner = styled.div<InnerType>`
+const Inner = styled.div`
 	overflow-y: auto;
-	padding-left: ${props => props.innerPadding};
-	padding-right: ${props => props.innerPadding};
+	padding-left: ${props => props.theme.innerPadding};
+	padding-right: ${props => props.theme.innerPadding};
 	margin: 0;
 	font-weight: 300;
 	font-size: 1.15em;
 	position: absolute;
-	bottom: ${props => props.innerPadding};
-	top: ${props => props.innerPadding};
+	bottom: ${props => props.theme.innerPadding};
+	top: ${props => props.theme.innerPadding};
 	right: 0;
 	left: 0;
 `
 
 interface PanelContentProps {
-	borderRadius: string
 	visible: boolean
 	animation: 'door-left' | 'door-right' | 'flip-bottom' | 'flip-top'
-	backgroundColor: string
-	transitionDuration: string
-	innerPadding: string
 	children?: JSX.Element[] | JSX.Element
 }
 
 function PanelContent(props: PanelContentProps) {
 	return (
-		<Content
-			borderRadius={props.borderRadius}
-			visible={props.visible}
-			animation={props.animation}
-			backgroundColor={props.backgroundColor}
-			transitionDuration={props.transitionDuration}>
-			<Inner innerPadding={props.innerPadding}>{props.children}</Inner>
+		<Content visible={props.visible} animation={props.animation}>
+			<Inner>{props.children}</Inner>
 		</Content>
 	)
 }
