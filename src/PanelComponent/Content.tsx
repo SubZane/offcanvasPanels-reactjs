@@ -126,13 +126,13 @@ const Inner = styled.div`
 	left: 0;
 `
 
-interface PanelContentProps {
+interface iProps {
 	visible: boolean
 	animation: 'door-left' | 'door-right' | 'flip-bottom' | 'flip-top'
 	children?: JSX.Element[] | JSX.Element
 }
 
-function PanelContent(props: PanelContentProps) {
+function PanelContent(props: iProps) {
 	return (
 		<Content visible={props.visible} animation={props.animation}>
 			<Inner>{props.children}</Inner>

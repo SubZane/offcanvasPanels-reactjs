@@ -12,9 +12,7 @@ const fadeout = keyframes`
 `
 
 type OverlayType = {
-	fadein: boolean
-	fadeout: boolean
-	hide: boolean
+	fade: 'in' | 'out' | ''
 }
 
 const Overlay = styled.div<OverlayType>`
@@ -28,7 +26,7 @@ const Overlay = styled.div<OverlayType>`
 	display: none;
 	background: rgba(43,46,56,.9);
   ${props =>
-		props.fadein &&
+		props.fade === 'in' &&
 		css`
 			animation: ${fadein};
 			animation-duration: ${props.theme.transitionDuration};
@@ -38,7 +36,7 @@ const Overlay = styled.div<OverlayType>`
 			display: block;
 		`}
   ${props =>
-		props.fadeout &&
+		props.fade === 'out' &&
 		css`
 			animation: ${fadeout};
 			animation-duration: ${props.theme.transitionDuration};
@@ -49,30 +47,20 @@ const Overlay = styled.div<OverlayType>`
 			display: block;
 		`}
 	${props =>
-		props.hide &&
+		props.fade === '' &&
 		css`
 			display: none;
 		`}
 `
 
-interface OverlayProps {
-	fadein: boolean
-	fadeout: boolean
-	hide: boolean
+interface iProps {
+	fade: 'in' | 'out' | ''
 	handleEvent: () => void
 	onAnimationEnd: () => void
 }
 
-function OverlayContainer(props: OverlayProps) {
-	return (
-		<Overlay
-			fadein={props.fadein}
-			fadeout={props.fadeout}
-			hide={props.hide}
-			onClick={props.handleEvent}
-			onAnimationEnd={props.onAnimationEnd}
-		/>
-	)
+function OverlayContainer(props: iProps) {
+	return <Overlay fade={props.fade} onClick={props.handleEvent} onAnimationEnd={props.onAnimationEnd} />
 }
 
 export default OverlayContainer

@@ -1,11 +1,7 @@
 import React from 'react'
 import { styled, css } from './theme'
 
-type PanelButtonType = {
-	position: string
-}
-
-const PanelButton = styled.div<PanelButtonType>`
+const PanelButton = styled.div`
 	position: fixed;
 	width: 50px;
 	background-color: ${props => props.theme.button.backgroundColor || 'coral'};
@@ -18,20 +14,20 @@ const PanelButton = styled.div<PanelButtonType>`
 	z-index: 50;
 	cursor: pointer;
 	${props =>
-		props.position === 'center' &&
+		props.theme.button.position === 'center' &&
 		css`
 			bottom: 20px;
 			left: 50%;
 			margin-left: -25px;
 		`}
 	${props =>
-		props.position === 'left' &&
+		props.theme.button.position === 'left' &&
 		css`
 			bottom: 20px;
 			left: 20px;
 		`}
 	${props =>
-		props.position === 'right' &&
+		props.theme.button.position === 'right' &&
 		css`
 			bottom: 20px;
 			right: 20px;
@@ -50,13 +46,12 @@ const PanelButton = styled.div<PanelButtonType>`
 	}
 `
 
-interface PanelContentProps {
-	position: string
+interface iProps {
 	handleEvent: () => void
 }
 
-function PanelButtonContainer(props: PanelContentProps) {
-	return <PanelButton position={props.position} onClick={props.handleEvent}></PanelButton>
+function PanelButtonContainer(props: iProps) {
+	return <PanelButton onClick={props.handleEvent}></PanelButton>
 }
 
 export default PanelButtonContainer

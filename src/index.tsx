@@ -3,15 +3,10 @@ import ReactDOM from 'react-dom'
 import OffCanvasPanel from './PanelComponent/App'
 import { ThemeProvider, theme } from './PanelComponent/theme'
 
-// const mybutton = React.createRef()
-// <button className="custombutton" ref={mybutton}>
-// test
-// </button>
-
 ReactDOM.render(
 	<React.Fragment>
 		<ThemeProvider theme={theme}>
-			<OffCanvasPanel animation={'door-left'} customButtonReference={false} buttonPosition={'right'}></OffCanvasPanel>
+			<OffCanvasPanel state={''} showButton={true} animation={'door-left'}></OffCanvasPanel>
 		</ThemeProvider>
 	</React.Fragment>,
 	document.getElementById('root')

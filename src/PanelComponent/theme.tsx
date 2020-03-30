@@ -16,6 +16,7 @@ export interface IThemeInterface {
 	button: {
 		backgroundColor: string
 		color: string
+		position: string
 	}
 }
 
@@ -26,7 +27,8 @@ export const theme = {
 	innerPadding: '0px',
 	button: {
 		backgroundColor: '#8DBFD1',
-		color: '#fff'
+		color: '#fff',
+		position: 'right'
 	}
 }
 

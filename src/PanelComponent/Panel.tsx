@@ -88,14 +88,14 @@ const Panel = styled.div<PanelType>`
 			`}
 	}
 `
-interface PanelContainerProps {
+interface iProps {
 	visible: boolean
 	animation: 'door-left' | 'door-right' | 'flip-bottom' | 'flip-top'
 	onTransitionEnd: () => void
 	children?: JSX.Element[] | JSX.Element
 }
 
-function PanelContainer(props: PanelContainerProps) {
+function PanelContainer(props: iProps) {
 	return (
 		<Panel animation={props.animation} visible={props.visible} onTransitionEnd={props.onTransitionEnd}>
 			<Content visible={props.visible} animation={props.animation} children={props.children} />

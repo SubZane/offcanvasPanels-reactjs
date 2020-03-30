@@ -28,35 +28,32 @@ html {
 }
 `
 
-export interface FlyPanelsProps {
+interface iProps {
 	animation: 'door-left' | 'door-right' | 'flip-bottom' | 'flip-top'
-	customButtonReference: boolean
-	buttonPosition: string
 	children?: JSX.Element[] | JSX.Element
+	showButton: boolean
+	state: 'open' | 'close' | ''
 }
 
-function OffCanvasPanel(props: FlyPanelsProps) {
+function OffCanvasPanel(props: iProps) {
 	const [togglePanel, setTogglePanel] = useState<boolean>(false)
 	const [isPanelVisible, setPanelVisible] = useState<boolean>(false)
 	const [hasOverlayAnimationEnded, sethasOverlayAnimationEnded] = useState<boolean>(false)
 	const [hasPanelTransitionEnded, sethasPanelTransitionEnded] = useState<boolean>(false)
-	const [hideOverlay, setHideOverlay] = useState<boolean>(false)
-	const [fadeout, setFadeout] = useState<boolean>(false)
-	const [fadein, setFadein] = useState<boolean>(false)
-	const [isPanelButtonVisible, setIsPanelButtonVisible] = useState<boolean>(true)
+	const [fade, setFade] = useState<'in' | 'out' | ''>('')
 
 	useEffect(() => {
-		if (props.customButtonReference) {
-			// props.customButtonReference.addEventListener('click', openPanel)
-			// setIsPanelButtonVisible(false)
+		if (props.state === 'open') {
+			openPanel()
+		} else if (props.state === 'close') {
+			closePanel()
 		}
-	}, [props.customButtonReference])
+	}, [props.state])
 
 	useEffect(() => {
 		if (togglePanel) {
-			setHideOverlay(false)
 			setPanelVisible(true)
-			setFadein(true)
+			setFade('in')
 			if (hasOverlayAnimationEnded && hasPanelTransitionEnded) {
 				sethasOverlayAnimationEnded(false)
 				sethasPanelTransitionEnded(false)
@@ -64,15 +61,13 @@ function OffCanvasPanel(props: FlyPanelsProps) {
 		} else {
 			if (isPanelVisible) {
 				setPanelVisible(false)
-				setFadeout(true)
+				setFade('out')
 			}
-			if (hasOverlayAnimationEnded && fadeout) {
-				setHideOverlay(true)
-				setFadeout(false)
-				setFadein(false)
+			if (hasOverlayAnimationEnded && fade === 'out') {
+				setFade('')
 			}
 		}
-	}, [hasOverlayAnimationEnded, hasPanelTransitionEnded, togglePanel, isPanelVisible, fadeout])
+	}, [hasOverlayAnimationEnded, hasPanelTransitionEnded, togglePanel, isPanelVisible, fade])
 
 	function closePanel() {
 		setTogglePanel(false)
@@ -94,13 +89,7 @@ function OffCanvasPanel(props: FlyPanelsProps) {
 		<React.Fragment>
 			<GlobalStyle visible={isPanelVisible} />
 
-			<Overlay
-				fadein={fadein}
-				fadeout={fadeout}
-				hide={hideOverlay}
-				handleEvent={closePanel}
-				onAnimationEnd={onOverlayAnimationEnd}
-			/>
+			<Overlay fade={fade} handleEvent={closePanel} onAnimationEnd={onOverlayAnimationEnd} />
 
 			<Panel
 				animation={props.animation}
@@ -108,7 +97,7 @@ function OffCanvasPanel(props: FlyPanelsProps) {
 				onTransitionEnd={onPanelTransitionEnd}
 				children={props.children}
 			/>
-			{isPanelButtonVisible && <PanelButton position={props.buttonPosition} handleEvent={openPanel}></PanelButton>}
+			{props.showButton && <PanelButton handleEvent={openPanel}></PanelButton>}
 		</React.Fragment>
 	)
 }
