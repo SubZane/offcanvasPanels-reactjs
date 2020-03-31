@@ -1,33 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { styled, theme } from './theme'
-import { css, createGlobalStyle } from 'styled-components'
+import { styleHtmlBody } from './helpers/functions'
 import Overlay from './Overlay'
 import PanelButton from './PanelButton'
 import Panel from './Panel'
-
-const GlobalStyle = createGlobalStyle<{ visible: boolean }>`
-body {
-	${props =>
-		props.visible &&
-		css`
-			height: 100%;
-			width: 100%;
-			overflow: hidden;
-			position: fixed;
-		`}
-}
-
-html {
-	${props =>
-		props.visible &&
-		css`
-			height: 100%;
-			width: 100%;
-			overflow: hidden;
-			position: fixed;
-		`}
-}
-`
 
 interface iProps {
 	animation: 'door-left' | 'door-right' | 'flip-bottom' | 'flip-top'
@@ -50,6 +25,10 @@ function OffCanvasPanel(props: iProps) {
 			closePanel()
 		}
 	}, [props.state])
+
+	useEffect(() => {
+		styleHtmlBody(isPanelVisible)
+	}, [isPanelVisible])
 
 	useEffect(() => {
 		if (togglePanel) {
@@ -88,8 +67,6 @@ function OffCanvasPanel(props: iProps) {
 
 	return (
 		<React.Fragment>
-			<GlobalStyle visible={isPanelVisible} />
-
 			<Overlay fade={fade} handleEvent={closePanel} onAnimationEnd={onOverlayAnimationEnd} />
 
 			<Panel
