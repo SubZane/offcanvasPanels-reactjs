@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { css, createGlobalStyle } from './theme'
+import { styled, theme } from './theme'
+import { css, createGlobalStyle } from 'styled-components'
 import Overlay from './Overlay'
 import PanelButton from './PanelButton'
 import Panel from './Panel'
