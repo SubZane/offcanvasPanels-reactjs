@@ -2,6 +2,7 @@ import React from 'react'
 import { styled, theme } from './theme'
 import { Style } from '@glitz/type'
 import Content from './Content'
+import { animationType } from './helpers/types'
 
 const Panel = styled.div({
 	position: 'fixed',
@@ -9,7 +10,7 @@ const Panel = styled.div({
 	zIndex: 2000,
 	backfaceVisibility: 'hidden',
 	visibility: 'hidden',
-	transform: 'rotateX(0deg)'
+	transform: 'rotateX(0deg)',
 })
 const FlipTop = {
 	top: 0,
@@ -20,8 +21,8 @@ const FlipTop = {
 	'@media (min-width: 768px)': {
 		left: 'auto',
 		width: '30%',
-		borderRadius: '0 5px'
-	}
+		borderRadius: '0 5px',
+	},
 } as Style
 
 const DoorLeft = {
@@ -33,8 +34,8 @@ const DoorLeft = {
 	'@media (min-width: 768px)': {
 		right: 'auto',
 		width: '30%',
-		borderRadius: '0 5px'
-	}
+		borderRadius: '0 5px',
+	},
 } as Style
 
 const DoorRight = {
@@ -46,8 +47,8 @@ const DoorRight = {
 	'@media (min-width: 768px)': {
 		left: 'auto',
 		width: '30%',
-		borderRadius: '0 5px'
-	}
+		borderRadius: '0 5px',
+	},
 } as Style
 
 const FlipBottom = {
@@ -60,17 +61,17 @@ const FlipBottom = {
 		width: '600px',
 		left: '50%',
 		margin: {
-			left: '-300px'
-		}
-	}
+			left: '-300px',
+		},
+	},
 } as Style
 
 const Visible = {
 	visibility: 'visible',
-	opacity: 1
+	opacity: 1,
 } as Style
 
-function setStyle(animation: 'door-left' | 'door-right' | 'flip-bottom' | 'flip-top', visible: boolean) {
+function setStyle(animation: animationType, visible: boolean) {
 	if (animation === 'door-left') {
 		const css = DoorLeft
 		if (visible) {
@@ -108,7 +109,7 @@ function setStyle(animation: 'door-left' | 'door-right' | 'flip-bottom' | 'flip-
 
 interface PanelContainerProps {
 	visible: boolean
-	animation: 'door-left' | 'door-right' | 'flip-bottom' | 'flip-top'
+	animation: animationType
 	onTransitionEnd: () => void
 	children?: JSX.Element[] | JSX.Element
 }

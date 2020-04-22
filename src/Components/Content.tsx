@@ -1,6 +1,7 @@
 import React from 'react'
 import { styled, theme } from './theme'
 import { Style } from '@glitz/type'
+import { animationType } from './helpers/types'
 
 const Content = styled.div({
 	color: '#fff',
@@ -11,7 +12,7 @@ const Content = styled.div({
 	bottom: 0,
 	top: 0,
 	left: 0,
-	right: 0
+	right: 0,
 })
 
 const FlipTop = {
@@ -29,7 +30,7 @@ const FlipTop = {
 	opacity: 0,
 	transitionProperty: 'all',
 	transitionDuration: '0.3s',
-	transitionTimingFunction: 'ease-out'
+	transitionTimingFunction: 'ease-out',
 } as Style
 
 const DoorLeft = {
@@ -39,7 +40,7 @@ const DoorLeft = {
 	transformOrigin: '0 100%',
 	opacity: 0,
 	transitionProperty: 'all',
-	transitionDuration: '0.3s'
+	transitionDuration: '0.3s',
 } as Style
 
 const DoorRight = {
@@ -49,7 +50,7 @@ const DoorRight = {
 	transformStyle: 'preserve-3d',
 	transform: 'translateZ(100px) translateX(30%) rotateY(-90deg)',
 	transitionProperty: 'all',
-	transitionDuration: '0.3s'
+	transitionDuration: '0.3s',
 } as Style
 
 const FlipBottom = {
@@ -61,20 +62,20 @@ const FlipBottom = {
 	opacity: 0,
 	transitionProperty: 'all',
 	transitionDuration: '0.3s',
-	transitionTimingFunction: 'ease-out'
+	transitionTimingFunction: 'ease-out',
 } as Style
 
 const AnimateDoor = {
 	transform: 'translateZ(0px) translateX(0%) rotateY(0deg)',
-	opacity: 1
+	opacity: 1,
 } as Style
 
 const AnimateFlip = {
 	transform: 'translateY(0%) rotateX(0deg)',
-	opacity: 1
+	opacity: 1,
 } as Style
 
-function setStyle(animation: 'door-left' | 'door-right' | 'flip-bottom' | 'flip-top', visible: boolean) {
+function setStyle(animation: animationType, visible: boolean) {
 	if (animation === 'door-left') {
 		const css = DoorLeft
 		if (visible) {
@@ -115,7 +116,7 @@ const Inner = styled.div({
 	right: 0,
 	left: 0,
 	margin: {
-		xy: 0
+		xy: 0,
 	},
 	paddingLeft: 0,
 	paddingRight: 0,
@@ -124,13 +125,13 @@ const Inner = styled.div({
 	overflowY: 'auto',
 	font: {
 		size: '1.15em',
-		weight: 300
-	}
+		weight: 300,
+	},
 })
 
 interface iProps {
 	visible: boolean
-	animation: 'door-left' | 'door-right' | 'flip-bottom' | 'flip-top'
+	animation: animationType
 	children?: JSX.Element[] | JSX.Element
 }
 

@@ -3,12 +3,13 @@ import { styleHtmlBody } from './helpers/functions'
 import Overlay from './Overlay'
 import PanelButton from './PanelButton'
 import Panel from './Panel'
+import { fadeType, animationType, openType } from './helpers/types'
 
 interface iProps {
-	animation: 'door-left' | 'door-right' | 'flip-bottom' | 'flip-top'
+	animation: animationType
 	children?: JSX.Element[] | JSX.Element
 	showButton: boolean
-	state: 'open' | 'close' | ''
+	state: openType
 }
 
 function OffCanvasPanel(props: iProps) {
@@ -16,7 +17,7 @@ function OffCanvasPanel(props: iProps) {
 	const [isPanelVisible, setPanelVisible] = useState<boolean>(false)
 	const [hasOverlayAnimationEnded, sethasOverlayAnimationEnded] = useState<boolean>(false)
 	const [hasPanelTransitionEnded, sethasPanelTransitionEnded] = useState<boolean>(false)
-	const [fade, setFade] = useState<'in' | 'out' | ''>('')
+	const [fade, setFade] = useState<fadeType>('')
 
 	useEffect(() => {
 		if (props.state === 'open') {
