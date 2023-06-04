@@ -2,6 +2,7 @@ import React from 'react'
 
 import Content from './Content'
 import { css, styled } from './theme'
+import { animationTypes } from './types'
 
 type PanelType = {
 	visible: boolean
@@ -93,7 +94,7 @@ const Panel = styled.div<PanelType>`
 `
 interface iProps {
 	visible: boolean
-	animation: 'door-left' | 'door-right' | 'flip-bottom' | 'flip-top'
+	animation: animationTypes
 	onTransitionEnd: () => void
 	children?: JSX.Element[] | JSX.Element
 }

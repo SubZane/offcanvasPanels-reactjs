@@ -1,15 +1,16 @@
 import React from 'react'
 
 import { css, styled } from './theme'
+import { animationTypes } from './types'
 
 type ContentType = {
 	visible: boolean
-	animation: string
+	animation: animationTypes
 }
 
 const Content = styled.div<ContentType>`
 	color: #fff;
-	background: ${(props) => props.theme.backgroundColor};
+	background: ${(props) => props.theme.offcanvasPanel.backgroundColor};
 	max-width: 600px;
 	overflow: hidden;
 	position: absolute;
@@ -23,8 +24,8 @@ const Content = styled.div<ContentType>`
 		css`
 			border-bottom-left-radius: 0;
 			border-bottom-right-radius: 0;
-			border-top-left-radius: ${props.theme.borderRadius};
-			border-top-right-radius: $props.theme.borderRadius};
+			border-top-left-radius: ${props.theme.offcanvasPanel.borderRadius};
+			border-top-right-radius: $props.theme.offcanvasPanel.borderRadius};
 			top: 0;
 
 			transform-style: preserve-3d;
@@ -33,31 +34,31 @@ const Content = styled.div<ContentType>`
 			opacity: 0;
 			transition-timing-function: ease-out;
 			transition: all;
-			transition-duration: ${props.theme.transitionDuration};
+			transition-duration: ${props.theme.offcanvasPanel.transitionDuration};
 		`}
 
 	${(props) =>
 		props.animation === 'door-left' &&
 		css`
 			border-bottom-left-radius: 0;
-			border-bottom-right-radius: ${props.theme.borderRadius};
+			border-bottom-right-radius: ${props.theme.offcanvasPanel.borderRadius};
 			border-top-left-radius: 0;
-			border-top-right-radius: ${props.theme.borderRadius};
+			border-top-right-radius: ${props.theme.offcanvasPanel.borderRadius};
 
 			transform-style: preserve-3d;
 			transform: translateZ(100px) translateX(0%) rotateY(90deg);
 			transform-origin: 0 100%;
 			opacity: 0;
 			transition: all;
-			transition-duration: ${props.theme.transitionDuration};
+			transition-duration: ${props.theme.offcanvasPanel.transitionDuration};
 		`}
 
 	${(props) =>
 		props.animation === 'door-right' &&
 		css`
-			border-bottom-left-radius: ${props.theme.borderRadius};
+			border-bottom-left-radius: ${props.theme.offcanvasPanel.borderRadius};
 			border-bottom-right-radius: 0;
-			border-top-left-radius: ${props.theme.borderRadius};
+			border-top-left-radius: ${props.theme.offcanvasPanel.borderRadius};
 			border-top-right-radius: 0;
 
 			transform-style: preserve-3d;
@@ -65,7 +66,7 @@ const Content = styled.div<ContentType>`
 			transform-origin: 100% 0;
 			opacity: 0;
 			transition: all;
-			transition-duration: ${props.theme.transitionDuration};
+			transition-duration: ${props.theme.offcanvasPanel.transitionDuration};
 		`}
 
 	${(props) =>
@@ -73,8 +74,8 @@ const Content = styled.div<ContentType>`
 		css`
 		border-bottom-left-radius: 0;
 		border-bottom-right-radius: 0;
-		border-top-left-radius: ${props.theme.borderRadius};
-		border-top-right-radius: $props.theme.borderRadius};
+		border-top-left-radius: ${props.theme.offcanvasPanel.borderRadius};
+		border-top-right-radius: $props.theme.offcanvasPanel.borderRadius};
 		bottom: 0;
 
 		transform-style: preserve-3d;
@@ -83,7 +84,7 @@ const Content = styled.div<ContentType>`
 		opacity: 0;
 		transition-timing-function: ease-out;
 		transition: all;
-		transition-duration: ${props.theme.transitionDuration};
+		transition-duration: ${props.theme.offcanvasPanel.transitionDuration};
 	`}
 
 	${(props) =>
@@ -113,21 +114,21 @@ const Content = styled.div<ContentType>`
 
 const Inner = styled.div`
 	overflow-y: auto;
-	padding-left: ${(props) => props.theme.innerPadding};
-	padding-right: ${(props) => props.theme.innerPadding};
+	padding-left: ${(props) => props.theme.offcanvasPanel.innerPadding};
+	padding-right: ${(props) => props.theme.offcanvasPanel.innerPadding};
 	margin: 0;
 	font-weight: 300;
 	font-size: 1.15em;
 	position: absolute;
-	bottom: ${(props) => props.theme.innerPadding};
-	top: ${(props) => props.theme.innerPadding};
+	bottom: ${(props) => props.theme.offcanvasPanel.innerPadding};
+	top: ${(props) => props.theme.offcanvasPanel.innerPadding};
 	right: 0;
 	left: 0;
 `
 
 interface iProps {
 	visible: boolean
-	animation: 'door-left' | 'door-right' | 'flip-bottom' | 'flip-top'
+	animation: animationTypes
 	children?: JSX.Element[] | JSX.Element
 }
 
