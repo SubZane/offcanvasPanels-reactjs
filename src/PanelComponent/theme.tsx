@@ -5,7 +5,7 @@ const {
 	css,
 	createGlobalStyle,
 	keyframes,
-	ThemeProvider
+	ThemeProvider,
 } = styledComponents as styledComponents.ThemedStyledComponentsModule<IThemeInterface>
 
 export interface IThemeInterface {
@@ -28,8 +28,8 @@ export const theme = {
 	button: {
 		backgroundColor: '#8DBFD1',
 		color: '#fff',
-		position: 'right'
-	}
+		position: 'right',
+	},
 }
 
 export default styled

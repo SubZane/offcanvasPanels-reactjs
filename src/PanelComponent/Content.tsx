@@ -1,5 +1,6 @@
 import React from 'react'
-import { styled, css } from './theme'
+
+import { css, styled } from './theme'
 
 type ContentType = {
 	visible: boolean
@@ -8,7 +9,7 @@ type ContentType = {
 
 const Content = styled.div<ContentType>`
 	color: #fff;
-	background: ${props => props.theme.backgroundColor};
+	background: ${(props) => props.theme.backgroundColor};
 	max-width: 600px;
 	overflow: hidden;
 	position: absolute;
@@ -17,18 +18,17 @@ const Content = styled.div<ContentType>`
 	left: 0;
 	right: 0;
 
-	${props =>
+	${(props) =>
 		props.animation === 'flip-top' &&
 		css`
-			border-bottom-left-radius: ${props.theme.borderRadius};
-			border-bottom-right-radius: ${props.theme.borderRadius};
-			border-top-left-radius: 0;
-			border-top-right-radius: 0;
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
+			border-top-left-radius: ${props.theme.borderRadius};
+			border-top-right-radius: $props.theme.borderRadius};
 			top: 0;
-			right: 0;
 
 			transform-style: preserve-3d;
-			transform: translateY(-100%) rotateX(90deg);
+			transform: translateY(0%) rotateX(-90deg);
 			transform-origin: 100% 0;
 			opacity: 0;
 			transition-timing-function: ease-out;
@@ -36,7 +36,7 @@ const Content = styled.div<ContentType>`
 			transition-duration: ${props.theme.transitionDuration};
 		`}
 
-  ${props =>
+	${(props) =>
 		props.animation === 'door-left' &&
 		css`
 			border-bottom-left-radius: 0;
@@ -52,7 +52,7 @@ const Content = styled.div<ContentType>`
 			transition-duration: ${props.theme.transitionDuration};
 		`}
 
-	${props =>
+	${(props) =>
 		props.animation === 'door-right' &&
 		css`
 			border-bottom-left-radius: ${props.theme.borderRadius};
@@ -68,7 +68,7 @@ const Content = styled.div<ContentType>`
 			transition-duration: ${props.theme.transitionDuration};
 		`}
 
-	${props =>
+	${(props) =>
 		props.animation === 'flip-bottom' &&
 		css`
 		border-bottom-left-radius: 0;
@@ -86,7 +86,7 @@ const Content = styled.div<ContentType>`
 		transition-duration: ${props.theme.transitionDuration};
 	`}
 
-	${props =>
+	${(props) =>
 		props.visible &&
 		(props.animation === 'door-left' || props.animation === 'door-right') &&
 		css`
@@ -94,7 +94,7 @@ const Content = styled.div<ContentType>`
 			opacity: 1;
 		`}
 
-	${props =>
+	${(props) =>
 		props.visible &&
 		props.animation === 'flip-top' &&
 		css`
@@ -102,26 +102,25 @@ const Content = styled.div<ContentType>`
 			opacity: 1;
 		`}
 
-	${props =>
+	${(props) =>
 		props.visible &&
 		props.animation === 'flip-bottom' &&
 		css`
 			transform: translateY(0%) rotateX(0deg);
 			opacity: 1;
 		`}
-
 `
 
 const Inner = styled.div`
 	overflow-y: auto;
-	padding-left: ${props => props.theme.innerPadding};
-	padding-right: ${props => props.theme.innerPadding};
+	padding-left: ${(props) => props.theme.innerPadding};
+	padding-right: ${(props) => props.theme.innerPadding};
 	margin: 0;
 	font-weight: 300;
 	font-size: 1.15em;
 	position: absolute;
-	bottom: ${props => props.theme.innerPadding};
-	top: ${props => props.theme.innerPadding};
+	bottom: ${(props) => props.theme.innerPadding};
+	top: ${(props) => props.theme.innerPadding};
 	right: 0;
 	left: 0;
 `

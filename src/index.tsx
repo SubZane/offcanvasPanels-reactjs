@@ -1,12 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+
 import OffCanvasPanel from './PanelComponent/App'
-import { ThemeProvider, theme } from './PanelComponent/theme'
+import { theme, ThemeProvider } from './PanelComponent/theme'
 
 ReactDOM.render(
 	<React.Fragment>
 		<ThemeProvider theme={theme}>
-			<OffCanvasPanel state={''} showButton={true} animation={'door-left'}></OffCanvasPanel>
+			<OffCanvasPanel state={''} showButton={true} animation={'flip-top'}></OffCanvasPanel>
 		</ThemeProvider>
 	</React.Fragment>,
 	document.getElementById('root')

@@ -1,6 +1,7 @@
 import React from 'react'
-import { styled, css } from './theme'
+
 import Content from './Content'
+import { css, styled } from './theme'
 
 type PanelType = {
 	visible: boolean
@@ -9,22 +10,12 @@ type PanelType = {
 
 const Panel = styled.div<PanelType>`
 	position: fixed;
-  max-width: 700px;
+	max-width: 700px;
 	z-index: 2000;
 	backface-visibility: hidden;
 	visibility: hidden;
 	transform: rotateX(0deg);
-	${props =>
-		props.animation === 'flip-top' &&
-		css`
-			top: 0px;
-			right: 10px;
-			left: 50px;
-			height: 400px;
-			perspective: 1300px;
-		`}
-
-	${props =>
+	${(props) =>
 		props.animation === 'door-left' &&
 		css`
 			top: 10px;
@@ -34,7 +25,7 @@ const Panel = styled.div<PanelType>`
 			perspective: 1300px;
 		`}
 
-	${props =>
+	${(props) =>
 		props.animation === 'door-right' &&
 		css`
 			top: 10px;
@@ -44,7 +35,7 @@ const Panel = styled.div<PanelType>`
 			perspective: 1300px;
 		`}
 
-	${props =>
+	${(props) =>
 		props.animation === 'flip-bottom' &&
 		css`
 			top: 50px;
@@ -54,7 +45,17 @@ const Panel = styled.div<PanelType>`
 			perspective: 1300px;
 		`}
 
-	${props =>
+	${(props) =>
+		props.animation === 'flip-top' &&
+		css`
+			top: 0;
+			right: 20px;
+			left: 20px;
+			bottom: 50px;
+			perspective: 1300px;
+		`}
+
+	${(props) =>
 		props.visible &&
 		css`
 			visibility: visible;
@@ -62,24 +63,26 @@ const Panel = styled.div<PanelType>`
 		`}
 
 	@media (min-width: 768px) {
-		${props =>
+		${(props) =>
 			props.animation === 'door-left' &&
 			css`
 				right: auto;
 			`}
-		${props =>
+		${(props) =>
 			props.animation === 'door-right' &&
-			css`
-				left: auto;
-			`}
-		${props =>
-			props.animation === 'flip-top' &&
 			css`
 				left: auto;
 			`}
     width: 30%;
 		border-radius: 0 5px;
-		${props =>
+		${(props) =>
+			props.animation === 'flip-top' &&
+			css`
+				width: 600px;
+				left: 50%;
+				margin-left: -300px; /* Half of the width */
+			`}
+		${(props) =>
 			props.animation === 'flip-bottom' &&
 			css`
 				width: 600px;
