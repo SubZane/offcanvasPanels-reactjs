@@ -1,7 +1,12 @@
 {
-	"name": "offcanvas-panels",
+	"name": "offcanvaspanels-reactjs",
 	"version": "1.0.0",
-	"private": true,
+	"private": false,
+	"description": "offcanvasPanels-reactjs is an off-canvas panel component written in ReactJS with TypeScript and Styled Components.",
+	"repository": "https://subzane@github.com/SubZane/offcanvaspanels-reactjs.git",
+	"homepage": "https://subzane.github.io/offcanvaspanels-reactjs",
+	"bugs": "https://github.com/SubZane/offcanvaspanels-reactjs/issues",
+	"author": "Andreas Lee-Norman <andreas@lee-norman.com>",
 	"dependencies": {
 		"@testing-library/jest-dom": "^5.14.1",
 		"@testing-library/react": "^13.0.0",
